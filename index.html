@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html>
+
+ <head>
+  <meta charset="UTF-8">
+  <title>Batik Muse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jockey+One&family=Jersey+25&family=Kameron:wght@400..700&family=Jomolhari&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Josefin+Sans:wght@400;600&family=Jost:wght@300;400&family=Jomhuria&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+ </head>
+
+ <body>
+ 
+ <div id="home">
+  <header class="navbar"> 
+
+   <div id="logo">
+     <img src="img/Logo Brand_1.png" alt="logo">
+     <img src="img/Nama Brand_2.png" alt="nama brand">
+   </div>
+
+       <div class="search-container">
+
+        <input type="text">
+
+        <button class="search-btn">&#8981;</button>
+        
+       </div>
+
+       <button class="menu-btn">&#9776;</button>
+       
+  </header>
+
+       <div class="sidebar-navigation" id="right-sidebar">
+        <nav class="sidebar-menu-list">
+          <a href="#home" class="sidebar-link-item">HOME</a>
+          <a href="#workshop" class="sidebar-link-item">WORKSHOP</a>
+          <a href="#review" class="sidebar-link-item">REVIEW</a>
+          <a href="#festival-footer-section" class="sidebar-link-item">ABOUT US</a>
+        </nav>
+       </div>
+
+  <div id="poster">
+    <img src="img/Poster Event.jpg" alt="Poster Event">
+  </div>
+        
+     <section class="hero">
+      <div id="box">
+         <h4>A celebration of tradition, artistry, and timeless elegance.</h4>
+         <h4>Immerse yourself in the beauty of Malaysian Batik at this vibrant festival.</h4>
+         <button class="btn" id="join-event-trigger">JOIN EVENT NOW!</button>
+      </div>
+     </section>
+
+<!-- ==================== POP-UP MODAL PENDAFTARAN (REGISTRATION FORM) ==================== -->
+<div class="registration-modal-overlay" id="regModal">
+    <div class="registration-modal-card">
+        <!-- Butang Pangkah Tutup (X) -->
+        <button class="modal-close-x" id="closeRegModal">&times;</button>
+        
+        <!-- SKRIN 1: BORANG UTAMA -->
+        <div class="modal-screen active-screen" id="registration-screen-1">
+            <h2 class="modal-main-title">REGISTRATION FORM</h2>
+            
+            <!-- Banner Imej Promosi Festival -->
+            <div class="modal-banner-box">
+                <img src="img/form_banner.png" alt="Malaysia Batik Festival 2026 Banner" class="modal-banner-img">
+            </div>
+
+            <form id="festival-ticket-form" onsubmit="event.preventDefault();">
+                <!-- 1. CITIZENSHIP -->
+                <div class="form-section-block">
+                    <h3 class="section-block-title">1. CITIZENSHIP</h3>
+                    
+                    <div class="citizenship-row">
+                        <!-- Pilihan Malaysian -->
+                        <div class="citizen-option-item">
+                            <label class="radio-label-container">
+                                <input type="radio" name="citizenship-type" value="malaysian" checked>
+                                <span class="custom-radio-circle"></span>
+                                <span class="option-text-label">Malaysian</span>
+                            </label>
+                            <span class="price-tag-display">RM 25</span>
+                            <div class="quantity-control-wrapper">
+                               <button type="button" class="qty-btn minus-btn" data-type="malaysian">-</button>
+                               <span class="qty-number-display" id="qty-malaysian">1</span>
+                               <button type="button" class="qty-btn plus-btn" data-type="malaysian">+</button>
+                            </div>
+                        </div>
+
+                        <!-- Pilihan Non-Malaysian -->
+                        <div class="citizen-option-item">
+                            <label class="radio-label-container">
+                                <input type="radio" name="citizenship-type" value="non-malaysian">
+                                <span class="custom-radio-circle"></span>
+                                <span class="option-text-label">Non-Malaysian</span>
+                            </label>
+                            <span class="price-tag-display">RM 45</span>
+                            <div class="quantity-control-wrapper">
+                                <button type="button" class="qty-btn minus-btn" data-type="non-malaysian" disabled>-</button>
+                                <span class="qty-number-display" id="qty-non-malaysian">1</span>
+                                <button type="button" class="qty-btn plus-btn" data-type="non-malaysian" disabled>+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. PARTICIPANT INFORMATIONS & PAYMENT PREVIEW -->
+                <div class="form-section-block bottom-layout-grid">
+                    <!-- Lajur Input Maklumat -->
+                    <div class="info-inputs-column">
+                        <h3 class="section-block-title">2. PARTICIPANT INFORMATIONS</h3>
+                        
+                        <div class="input-field-group">
+                            <label>Name:</label>
+
+                        <input type="text" required class="form-styled-input">
+                        </div>
+                        <div class="input-field-group">
+                            <label>Email:</label>
+                            <input type="email" required class="form-styled-input">
+                        </div>
+                        <div class="input-field-group">
+                            <label>Phone number:</label>
+                            <input type="tel" required class="form-styled-input">
+                        </div>
+                    </div>
+
+                    <!-- Lajur Rumusan Bayaran -->
+                    <div class="payment-summary-column">
+                        <div class="gateway-logos-row">
+                            <img src="img/fpx.png" alt="Payment Gateways (Credit Card, Online Banking, FPX)" class="gateways-badge-img">
+                        </div>
+                        
+                        <div class="total-price-row">
+                            <span class="total-label-text">Total :</span>
+                            <span class="total-amount-value" id="final-total-price">RM 25</span>
+                        </div>
+                        
+                        <button type="submit" class="modal-pay-red-btn" id="proceed-to-pay-btn">PAY</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- SKRIN 2: PILIHAN BANK (FPX ONLINE BANKING) -->
+        <div class="modal-screen" id="registration-screen-2">
+            <h2 class="modal-main-title">SELECT YOUR BANK / WALLET</h2>
+            <p class="bank-select-subtitle">Please select one of the payment options below to proceed:</p>
+            
+            <div class="bank-selection-grid">
+                <!-- Maybank -->
+                <div class="bank-card-item" data-bank-url="https://www.maybank2u.com.my">
+                    <div class="bank-logo-placeholder">Maybank2u</div>
+                    <span>Maybank</span>
+                </div>
+                <!-- RHB -->
+                <div class="bank-card-item" data-bank-url="https://onlinebanking.rhbgroup.com/my/login.com.my">
+                    <div class="bank-logo-placeholder">RHB Now</div>
+                    <span>RHB Bank</span>
+                </div>
+                <!-- Bank Islam -->
+                <div class="bank-card-item" data-bank-url="https://bimb.com/bimb-web.com.my">
+                    <div class="bank-logo-placeholder">Bank Islam</div>
+                    <span>Bank Islam</span>
+                </div>
+                <!-- TnG eWallet -->
+                <div class="bank-card-item" data-bank-url="https://www.touchngo.com.my">
+                    <div class="bank-logo-placeholder">TnG eWallet</div>
+                    <span>Touch 'n Go</span>
+                </div>
+            </div>
+            
+            <button type="button" class="back-to-form-btn" id="back-to-screen-1">← Back to Registration</button>
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+   <section class="festival-section-two" id="workshop">
+      <div class="festival-container">
+          
+          <header class="tab-navigation">
+              <div class="tabs">
+                  <button class="tab-item active" data-tab="workshop">WORKSHOP</button>
+                  <button class="tab-item" data-tab="fashion-show">FASHION</button>
+                  <button class="tab-item" data-tab="food">FOOD</button>
+                  <button class="tab-item" data-tab="activity">ACTIVITY</button>
+                  <button class="tab-item" data-tab="booth">BOOTH</button>
+              </div>
+              <div class="divider-line"></div>
+          </header>
+
+          <div id="workshop" class="tab-content active">
+              <div class="content-wrapper">
+                  <div class="cards-container">
+                      
+                      <div class="card">
+                          <div class="card-image-wrapper">
+                              <img src="img/Workshop_1.png" alt="Batik Painting" class="card-image">
+                          </div>
+                          <div class="card-footer">
+                              <h3 class="card-title">Batik Painting</h3>
+                              <div class="decorative-line">
+                                  <span class="diamond"></span>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="card">
+                          <div class="card-image-wrapper">
+                              <img src="img/Workshop_2.jpg" alt="DIY Batik Tote Bag" class="card-image">
+                          </div>
+                          <div class="card-footer">
+                              <h3 class="card-title">DIY Batik Tote Bag</h3>
+                              <div class="decorative-line">
+                                  <span class="diamond"></span>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="card">
+                          <div class="card-image-wrapper">
+                              <img src="img/Workshop_3.png" alt="Batik Canting" class="card-image">
+                          </div>
+                          <div class="card-footer">
+                              <h3 class="card-title">Batik Canting</h3>
+                              <div class="decorative-line">
+                                  <span class="diamond"></span>
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+
+              </div>
+          </div>
+
+          <div id="fashion-show" class="tab-content">
+              <div class="video-section-wrapper">
+                  <div class="video-container">
+                      <video id="fashionVideo" poster="img/SS VID BATIK MALAYSIA FESTIVAL WEB.png" preload="metadata">
+                          <source src="img/VID_FASHION_SHOW.mp4" type="video/mp4">
+                      </video>
+                      
+                      <button class="video-play-btn" id="playBtn" aria-label="Play Video">
+                          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M8 5V19L19 12L8 5Z" fill="#4D2A14"/>
+                          </svg>
+                      </button>
+                  </div>
+              </div>
+          </div>
+              
+            <div id="food" class="tab-content">
+              <div class="food-section-container">
+                  
+                  <!-- Tajuk dan Teks Penerangan -->
+                  <h2 class="food-main-title">FROM TRADITIONAL TO MODERN</h2>
+                  <p class="food-description">
+                      Celebrate Malaysia's diverse culinary heritage with a selection of authentic local dishes, <br>
+                      colourful traditional desserts, delicious pasta, gourmet burgers, and refreshing signature drinks
+                  </p>
+
+                  <!-- Grid Gambar Makanan -->
+                  <div class="food-grid">
+                      <!-- Baris 1 -->
+                      <div class="food-item"><img src="img/Food_1.jpg" alt="Nasi Lemak"></div>
+                      <div class="food-item"><img src="img/Food_2.jpg" alt="Satay"></div>
+                      <div class="food-item"><img src="img/Food_3.jpg" alt="Laksa / Mee"></div>
+                      
+                      <!-- Baris 2 -->
+                      <div class="food-item"><img src="img/Food_4.jpg" alt="Kuih Muih"></div>
+                      <div class="food-item"><img src="img/Food_5.jpg" alt="Mooncake / Dessert"></div>
+                      <div class="food-item"><img src="img/Food_6.jpg" alt="Pasta"></div>
+                  </div>
+
+                  <!-- Baris 3 (2 Gambar di Tengah) -->
+                  <div class="food-grid-bottom">
+                      <div class="food-item"><img src="img/Fodd_7.jpg" alt="Burgers"></div>
+                      <div class="food-item"><img src="img/Food_8.jpg" alt="Drinks"></div>
+                  </div>
+
+              </div>
+           </div>
+
+<!-- ==================== TAB 4: ACTIVITY ==================== -->
+          <div id="activity" class="tab-content">
+              <div class="activity-section-wrapper">
+                  
+                  <!-- PAGE 1: Mempunyai 3 Kad -->
+                  <div id="activity-page-1" class="activity-page active">
+                      <div class="activity-cards-container three-cards">
+                          
+                          <!-- Kad 1 -->
+                          <div class="activity-card">
+                              <div class="activity-img-box">
+                                  <img src="img/Activity_1.jpg" alt="Traditional Costume Experience">
+                              </div>
+                              <div class="activity-card-title-box">
+                                  <span>Traditional Costume Experience</span>
+                              </div>
+                          </div>
+
+                          <!-- Kad 2 -->
+                          <div class="activity-card">
+                              <div class="activity-img-box">
+                                  <img src="img/Activity_2.jpg" alt="Batik Scavenger Hunt">
+                              </div>
+                              <div class="activity-card-title-box">
+                                  <span>Batik Scavenger Hunt</span>
+                              </div>
+                          </div>
+
+                          <!-- Kad 3 -->
+                          <div class="activity-card">
+                              <div class="activity-img-box">
+                                  <img src="img/Activity_3.jpg" alt="Batik Stamp Station">
+                              </div>
+                              <div class="activity-card-title-box">
+                                  <span>Batik Stamp Station</span>
+                              </div>
+                          </div>
+
+                      </div>
+
+                      <!-- Butang Arrow Kanan -->
+                      <button class="activity-arrow arrow-right" id="activity-btn-next" aria-label="Next Page">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                      </button>
+                  </div>
+
+                  <!-- PAGE 2: Mempunyai 2 Kad -->
+                  <div id="activity-page-2" class="activity-page">
+                      
+                      <!-- Butang Arrow Kiri -->
+                      <button class="activity-arrow arrow-left" id="activity-btn-prev" aria-label="Previous Page">
+                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                      </button>
+
+                      <div class="activity-cards-container two-cards">
+                          
+                          <!-- Kad 4 -->
+                          <div class="activity-card">
+                              <div class="activity-img-box">
+                                  <img src="img/Activity_4.jpg" alt="Spin & Win Batik Wheel">
+                              </div>
+                              <div class="activity-card-title-box">
+                                  <span>Spin & Win Batik Wheel</span>
+                              </div>
+                          </div>
+
+                          <!-- Kad 5 -->
+                          <div class="activity-card">
+                              <div class="activity-img-box">
+                                  <img src="img/Activity_5.jpg" alt="Giant Batik Puzzle">
+                              </div>
+                              <div class="activity-card-title-box">
+                                  <span>Giant Batik Puzzle</span>
+                              </div>
+                          </div>
+
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+
+          <!-- ==================== TAB 5: BOOTH ==================== -->
+          <div id="booth" class="tab-content"> 
+              <div class="booth-section-wrapper">
+                  <div class="booth-grid-container">
+                      
+                      <!-- Kad 1: Batik Apparel Booth -->
+                      <div class="booth-card">
+                          <div class="booth-img-box">
+                              <img src="img/Booth_1.jpg" alt="Batik Apparel Booth">
+                          </div>
+                          <div class="booth-title-box">
+                              <span>Batik Apparel Booth</span>
+                          </div>
+                      </div>
+
+                      <!-- Kad 2: Batik Art Gallery Booth -->
+                      <div class="booth-card">
+                          <div class="booth-img-box">
+                              <img src="img/Booth_2.jpg" alt="Batik Art Gallery Booth">
+                          </div>
+                          <div class="booth-title-box">
+                              <span>Batik Art Gallery Booth</span>
+                          </div>
+                      </div>
+
+                      <!-- Kad 3: Batik Handmade Crafts Booth -->
+                      <div class="booth-card">
+                          <div class="booth-img-box">
+                              <img src="img/Booth_4.jpg" alt="Batik Handmade Crafts Booth">
+                          </div>
+                          <div class="booth-title-box">
+                              <span>Batik Handmade Crafts Booth</span>
+                          </div>
+                      </div>
+
+                      <!-- Kad 4: Batik Souvenir Booth -->
+                      <div class="booth-card">
+                          <div class="booth-img-box">
+                              <img src="img/Booth_3.jpg" alt="Batik Souvenir Booth">
+                          </div>
+                          <div class="booth-title-box">
+                              <span>Batik Souvenir Booth</span>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </section>
+
+ <!-- ==================== SECTION 3: COUNTDOWN & VIDEO PREVIEW ==================== -->
+  <section class="festival-section-three">
+      <div class="countdown-container">
+          
+          <!-- Jam Countdown (Kotak Warna Dusty Pink) -->
+          <div class="countdown-clock-box">
+              <span id="countdown-timer">00:00:00:00</span>
+          </div>
+          
+          <!-- Teks Amaran / Hebahan -->
+          <h3 class="countdown-sub-text">DON'T MISS OUT THE EVENT!</h3>
+
+          <!-- Bingkai Video MP4 Tempatan (Gaya Tiruan YouTube) -->
+          <div class="youtube-preview-wrapper">
+              <div class="youtube-image-container" id="s3-video-box">
+                  
+                  <!-- Video MP4 sebenar (Disembunyikan kawalan asal, kita guna butang custom) -->
+                  <!-- Gantikan 'img/VID_TEASER.mp4' dengan nama fail video anda -->
+                  <video id="teaserVideo" preload="metadata">
+                      <source src="img/VID_YOUTUBE.mp4" type="video/mp4">
+                  </video>
+
+                  <!-- LAPISAN OVERLAY: Imej statik tiruan YouTube berserta logo -->
+                  <!-- Gantikan 'img/youtube-thumbnail.jpg' dengan nama imej lakaran anda -->
+                  <div class="video-overlay-layer" id="s3-overlay">
+                      <img src="img/Youtube.png" alt="Batik Festival Teaser" class="youtube-thumb">
+                      
+                      <!-- Butang Play Custom di Tengah -->
+                      <button class="yt-play-button" id="s3-play-btn" aria-label="Play Teaser Video">
+                          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M8 5V19L19 12L8 5Z" fill="black"/>
+                          </svg>
+                      </button>
+                  </div>
+
+              </div>
+            </div>
+
+      </div>
+  </section>
+
+<!-- ==================== SECTION 4: HIGHLIGHT & REVIEW ==================== -->
+  <section class="festival-section-four" id="review">
+      
+      <h2 class="review-main-title">HIGHLIGHT & REVIEW</h2>
+
+      <div class="review-slider-wrapper">
+          
+          <!-- HALAMAN 1 (Paparan Pertama: Maria, Lia, Natasha) -->
+          <div id="review-page-1" class="review-page active">
+              <div class="review-cards-grid">
+                  
+                  <!-- Kad 1: Maria -->
+                  <div class="review-card">
+                      <div class="review-img-box">
+                          <img src="img/Review_1.jpg" alt="Hands-on Batik Workshop">
+                          <div class="review-img-label">Hands-on Batik Workshop Session ✒️</div>
+                      </div>
+                      <div class="review-content-box">
+                          <div class="reviewer-info">
+                              <img src="img/pfp_2.png" alt="Maria" class="reviewer-avatar">
+                              <div class="reviewer-meta">
+                                  <h4 class="reviewer-name">Maria</h4>
+                                  <span class="review-date">1 September 2025</span>
+                              </div>
+                          </div>
+                          <p class="review-text">The workshop was fun and very exciting. XD</p>
+                          <div class="star-rating"><img src="img/Rating_Star.png" alt="5 Stars"></div>
+                      </div>
+                  </div>
+
+                  <!-- Kad 2: Lia -->
+                  <div class="review-card no-label-card">
+                      <div class="review-img-box">
+                          <img src="img/Review_2.jpg" alt="Batik Art Close-up">
+                      </div>
+                      <div class="review-content-box">
+                          <div class="reviewer-info">
+                              <img src="img/pfp_3.png" alt="Lia" class="reviewer-avatar">
+                              <div class="reviewer-meta">
+                                  <h4 class="reviewer-name">Lia</h4>
+                                  <span class="review-date">20 August 2025</span>
+                              </div>
+                          </div>
+                          <p class="review-text">I found new hobby LOL :D ..might as well do this everytime I get stressed out by something, Otherwise I would exploded like always. Haha :></p>
+                          <div class="star-rating"><img src="img/Rating_Star.png" alt="5 Stars"></div>
+                      </div>
+                  </div>
+
+                  <!-- Kad 3: Natasha -->
+                  <div class="review-card">
+                      <div class="review-img-box">
+                          <img src="img/Food Stall.jpg" alt="Batik Festival Stall">
+                          <div class="review-img-label">A Taste of the Batik Festival ✨</div>
+                      </div>
+                      <div class="review-content-box">
+                          <div class="reviewer-info">
+                              <img src="img/pfp_1.png" alt="Natasha" class="reviewer-avatar">
+                              <div class="reviewer-meta">
+                                  <h4 class="reviewer-name">Natasha</h4>
+                                  <span class="review-date">18 August 2025</span>
+                              </div>
+                          </div>
+                          <p class="review-text">I love the food here XD really mouth wateringggg.</p>
+                          <div class="star-rating"><img src="img/Rating_Star.png" alt="5 Stars"></div>
+                      </div>
+                  </div>
+
+              </div>
+
+              <!-- Butang Arrow Kanan Sahaja untuk Halaman 1 -->
+              <button class="review-arrow arrow-right next-btn-s4" aria-label="Next Page">></button>
+          </div>
+
+<!-- HALAMAN 2 (Paparan Kedua: Air, Waveyein, Mira) -->
+          <div id="review-page-2" class="review-page">
+              
+              <!-- Butang Arrow Kiri untuk Halaman 2 -->
+              <button class="review-arrow arrow-left prev-btn-s4" aria-label="Previous Page"><</button>
+
+              <div class="review-cards-grid">
+                  
+                  <!-- Kad 4: Air -->
+                  <div class="review-card">
+                      <div class="review-img-box">
+                          <img src="img/Review_1.jpg" alt="Hands-on Batik Workshop">
+                          <div class="review-img-label">Hands-on Batik Workshop Session ✒️</div>
+                      </div>
+                      <div class="review-content-box">
+                          <div class="reviewer-info">
+                              <img src="img/pfp_2.png" alt="Air" class="reviewer-avatar">
+                              <div class="reviewer-meta">
+                                  <h4 class="reviewer-name">Air</h4>
+                                  <span class="review-date">2 September 2025</span>
+                              </div>
+                          </div>
+                          <p class="review-text">Loved the workshop! It was fun and very exciting.</p>
+                          <div class="star-rating"><img src="img/Rating_Star.png" alt="5 Stars"></div>
+                      </div>
+                  </div>
+
+                  <!-- Kad 5: Waveyein -->
+                  <div class="review-card no-label-card">
+                      <div class="review-img-box">
+                          <img src="img/Review_2.jpg" alt="Batik Art Close-up">
+                      </div>
+                      <div class="review-content-box">
+                          <div class="reviewer-info">
+                              <img src="img/pfp_3.png" alt="Waveyein" class="reviewer-avatar">
+                              <div class="reviewer-meta">
+                                  <h4 class="reviewer-name">Waveyein</h4>
+                                  <span class="review-date">24 August 2025</span>
+                              </div>
+                          </div>
+                          <p class="review-text">The batik festival was such an amazing experience! I joined the workshop and learned so much about traditional techniques. Everything felt very calming and inspiring. Highly recommended!</p>
+                          <div class="star-rating"><img src="img/Rating_Star.png" alt="5 Stars"></div>
+                      </div>
+                  </div>
+
+                  <!-- Kad 6: Mira -->
+                  <div class="review-card">
+                      <div class="review-img-box">
+                          <img src="img/Food Stall.jpg" alt="Batik Festival Stall">
+                          <div class="review-img-label">A Taste of the Batik Festival ✨</div>
+                      </div>
+                      <div class="review-content-box">
+                          <div class="reviewer-info">
+                              <img src="img/pfp_1.png" alt="Mira" class="reviewer-avatar">
+                              <div class="reviewer-meta">
+                                  <h4 class="reviewer-name">Mira</h4>
+                                  <span class="review-date">26 August 2025</span>
+                              </div>
+                          </div>
+                          <p class="review-text">Such a beautiful event! The food, atmosphere, and overall experience were amazing! ^^</p>
+                          <div class="star-rating"><img src="img/Rating_Star.png" alt="5 Stars"></div>
+                      </div>
+                  </div>
+
+              </div>
+
+              <!-- Butang Arrow Kanan untuk Halaman 2 -->
+              <button class="review-arrow arrow-right next-btn-s4" aria-label="Next Page">></button>
+          </div>
+
+          <!-- HALAMAN 3 (Halaman Terakhir: Artsy, Meong, Yue) -->
+          <div id="review-page-3" class="review-page">
+              
+              <!-- Butang Arrow Kiri Sahaja untuk Halaman 3 -->
+              <button class="review-arrow arrow-left prev-btn-s4" aria-label="Previous Page"><</button>
+
+              <div class="review-cards-grid">
+                  
+                  <!-- Kad 7: Artsy -->
+                  <div class="review-card">
+                      <div class="review-img-box">
+                          <img src="img/Review_1.jpg" alt="Hands-on Batik Workshop">
+                          <div class="review-img-label">Hands-on Batik Workshop Session ✒️</div>
+                      </div>
+                      <div class="review-content-box">
+                          <div class="reviewer-info">
+                              <img src="img/pfp_2.png" alt="Artsy" class="reviewer-avatar">
+                              <div class="reviewer-meta">
+                                  <h4 class="reviewer-name">Artsy</h4>
+                                  <span class="review-date">5 September 2025</span>
+                              </div>
+                          </div>
+                          <p class="review-text">Such a fun experience! It's been so long since I played with vibrant colors, and this workshop totally refreshed my creative side.</p>
+                          <div class="star-rating"><img src="img/Rating_Star.png" alt="5 Stars"></div>
+                      </div>
+                  </div>
+
+                  <!-- Kad 8: Meong -->
+                  <div class="review-card no-label-card">
+                      <div class="review-img-box">
+                          <img src="img/Review_2.jpg" alt="Batik Art Close-up">
+                      </div>
+                      <div class="review-content-box">
+                          <div class="reviewer-info">
+                              <img src="img/pfp_3.png" alt="Meong" class="reviewer-avatar">
+                              <div class="reviewer-meta">
+                                  <h4 class="reviewer-name">Meong</h4>
+                                  <span class="review-date">19 August 2025</span>
+                              </div>
+                          </div>
+                          <p class="review-text">Learning the 'mencanting' technique was so therapeutic. Watching the colors blend into this flower motif was pure magic!<br><br>Will try this again everytime I go to this kind of event ;></p>
+                          <div class="star-rating"><img src="img/Rating_Star.png" alt="5 Stars"></div>
+                      </div>
+                  </div>
+
+                  <!-- Kad 9: Yue -->
+                  <div class="review-card">
+                      <div class="review-img-box">
+                          <img src="img/Food Stall.jpg" alt="Batik Festival Stall">
+                          <div class="review-img-label">A Taste of the Batik Festival ✨</div>
+                      </div>
+                      <div class="review-content-box">
+                          <div class="reviewer-info">
+                              <img src="img/pfp_1.png" alt="Yue" class="reviewer-avatar">
+                              <div class="reviewer-meta">
+                                  <h4 class="reviewer-name">Yue</h4>
+                                  <span class="review-date">30 August 2025</span>
+                              </div>
+                          </div>
+                          <p class="review-text">10/10 for the atmosphere! The setup is so aesthetic, and the whole festival just feels alive and welcoming.</p>
+                          <div class="star-rating"><img src="img/Rating_Star.png" alt="5 Stars"></div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+
+           <div class="slider-dots">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+          </div>
+
+      </div> <!-- Penutup .review-slider-wrapper -->
+  </section>
+
+  <!-- ==================== FOOTER SECTION ==================== -->
+  <footer class="festival-footer-section" id="festival-footer-section">
+      
+      <!-- 1. BANNER SLIDER (BATIK MUSE) -->
+      <div class="footer-banner-slider">
+          <div class="banner-slides-container">
+              <!-- Banner 1 (Aktif Asal) -->
+              <div class="banner-slide active-slide">
+                  <img src="img/Banner Brand.jpg" alt="Batik Muse Banner 1">
+              </div>
+              <!-- Banner 2 -->
+              <div class="banner-slide">
+                  <img src="img/Banner_2.jpg" alt="Batik Muse Banner 2">
+              </div>
+              <!-- Banner 3 -->
+              <div class="banner-slide">
+                  <img src="img/Banner_3.jpg" alt="Batik Muse Banner 3">
+              </div>
+          </div>
+          
+          <!-- Indikator Tiga Dot Bawah Banner -->
+          <div class="banner-dots">
+              <span class="b-dot active" data-slide="0"></span>
+              <span class="b-dot" data-slide="1"></span>
+              <span class="b-dot" data-slide="2"></span>
+          </div>
+      </div>
+
+      <!-- 2. KANDUNGAN UTAMA FOOTER -->
+      <div class="footer-main-content">
+          <div class="footer-inner-layout">
+              
+              <!-- Bahagian Kiri: Langganan & Sosmed -->
+              <div class="footer-left-column">
+                  <div class="footer-logo-area">
+                      <img src="img/Logo Brand_1.png" alt="Batik Muse Logo" class="footer-logo-img">
+                       <img src="img/Nama Brand_2.png" alt="Batik Muse Text" class="footer-logo-text-img">
+                  </div>
+                  
+                  <p class="footer-stay-touch">
+                      STAY IN TOUCH WITH US !!<br>
+                      <span>and explore the brand behind the festival</span>
+                  </p>
+                  
+                  <form class="footer-email-form" onsubmit="event.preventDefault();">
+                      <input type="email" placeholder="Your Email" class="footer-email-input" required>
+                      <button type="submit" class="footer-discover-btn">DISCOVER BATIK MUSE !</button>
+                  </form>
+                  
+                  <!-- Ikon Sosial Media berserta Pautan Halaman Utama -->
+                  <div class="footer-social-icons">
+                              <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">
+                                 <img src="img/Logo TikTok.png" alt="TikTok" class="icon-tiktok">
+                             </a>
+                             <a href="https://www.instagram.com/accounts/login/" target="_blank" rel="noopener noreferrer">
+                                 <img src="img/Logo Instagram.png" alt="Instagram Login" class="icon-instagram">
+                             </a>
+                             <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
+                                 <img src="img/Logo YouTube.png" alt="Youtube" class="icon-youtube">
+                             </a>
+                  </div>
+              </div>
+
+              <!-- Bahagian Kanan: Pautan Menu -->
+              <div class="footer-right-column">
+                  <h3 class="footer-menu-title">ABOUT US</h3>
+                  <ul class="footer-menu-links">
+                      <li><a href="#our-story">Our Story</a></li>
+                      <li><a href="#join-team">Join Our Team</a></li>
+                      <li><a href="#contact-us">Contact Us</a></li>
+                  </ul>
+              </div>
+
+          </div>
+      </div>
+
+      <!-- 3. HAK CIPTA BAR BAWAH SEKALI -->
+      <div class="footer-bottom-bar">
+          <p>Batik Muse Fashion Sdn Bhd ( 1564723-S ) © 2026. All rights reserved.</p>
+          <p class="powered-text">Powered by SiteGiant</p>
+      </div>
+
+  </footer>
+
+
+  <script>
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // ========================================================
+    // 1. KONTROL UTAMA MODAL POP-UP (JOIN EVENT NOW)
+    // ========================================================
+    const joinBtn = document.getElementById('join-event-trigger');
+    const regModal = document.getElementById('regModal');
+    const closeBtn = document.getElementById('closeRegModal');
+    const screen1 = document.getElementById('registration-screen-1');
+    const screen2 = document.getElementById('registration-screen-2');
+    const backToScreen1Btn = document.getElementById('back-to-screen-1');
+
+    if (joinBtn && regModal) {
+        joinBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            regModal.classList.add('open-modal');
+            if (screen1) screen1.classList.add('active-screen');
+            if (screen2) screen2.classList.remove('active-screen');
+        });
+    }
+
+    if (closeBtn && regModal) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            regModal.classList.remove('open-modal');
+        });
+    }
+
+    // ========================================================
+    // 2. LOGIK PENGIRAAN TIKET & TUKAR ANGKA INTERAKTIF
+    // ========================================================
+    const prices = { malaysian: 25, 'non-malaysian': 45 };
+    let quantities = { malaysian: 1, 'non-malaysian': 1 };
+
+    function calculateTotalPrice() {
+        const checkedRadio = document.querySelector('input[name="citizenship-type"]:checked');
+        const totalElement = document.getElementById('final-total-price');
+        
+        if (checkedRadio && totalElement) {
+            const activeType = checkedRadio.value;
+            const total = prices[activeType] * quantities[activeType];
+            totalElement.textContent = 'RM ' + total;
+        }
+    }
+
+    const radioButtons = document.querySelectorAll('input[name="citizenship-type"]');
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            const selectedType = e.target.value;
+            document.querySelectorAll('.qty-btn').forEach(btn => {
+                if (btn.getAttribute('data-type') === selectedType) {
+                    btn.removeAttribute('disabled');
+                } else {
+                    btn.setAttribute('disabled', 'true');
+                }
+            });
+            calculateTotalPrice();
+        });
+    });
+
+    const qtyButtons = document.querySelectorAll('.qty-btn');
+    qtyButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const type = btn.getAttribute('data-type');
+            if (!type) return;
+
+            const isPlus = btn.classList.contains('plus-btn');
+            
+            if (isPlus) {
+                quantities[type]++;
+            } else if (quantities[type] > 1) {
+                quantities[type]--;
+            }
+
+            const targetSpanId = 'qty-' + type;
+            const displayElement = document.getElementById(targetSpanId);
+            
+            if (displayElement) {
+                displayElement.textContent = quantities[type];
+            }
+            
+            calculateTotalPrice();
+        });
+    });
+
+    const ticketForm = document.getElementById('festival-ticket-form');
+    if (ticketForm) {
+        ticketForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (screen1) screen1.classList.remove('active-screen');
+            if (screen2) screen2.classList.add('active-screen');
+        });
+    }
+
+    if (backToScreen1Btn) {
+        backToScreen1Btn.addEventListener('click', () => {
+            if (screen1) screen1.classList.add('active-screen');
+            if (screen2) screen2.classList.remove('active-screen');
+        });
+    }
+
+
+const bankCards = document.querySelectorAll('.bank-card-item');
+    bankCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const targetBankUrl = card.getAttribute('data-bank-url');
+            if (targetBankUrl) {
+                alert('Redirecting you securely to the secure FPX payment page...');
+                window.open(targetBankUrl, '_blank');
+            }
+        });
+    });
+
+    // ==========================================
+    // 3. LOGIK SIDEBAR MENU (DIKEKALKAN)
+    // ==========================================
+    const menuBtn = document.querySelector('.menu-btn');
+    const rightSidebar = document.getElementById('right-sidebar');
+
+    if (menuBtn && rightSidebar) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            rightSidebar.classList.toggle('show-sidebar');
+        });
+    }
+
+});
+
+// ========================================================
+// TAMBAHAN KHAS: CARIAN PINTAR & HIGHLIGHT TEAL (SUITABLE FOR HTML)
+// ========================================================
+const searchContainerInput = document.querySelector('.search-container input'); 
+const searchBtn = document.querySelector('.search-btn');
+
+if (searchContainerInput) {
+    
+    // Fungsi Utama untuk Jalankan Carian
+    function executeSearch() {
+        const query = searchContainerInput.value.trim().toLowerCase();
+        if (!query) return;
+
+        // Bersihkan sebarang highlight teal yang lama dahulu
+        document.querySelectorAll('.search-highlight-teal').forEach(el => {
+            el.outerHTML = el.textContent;
+        });
+
+        // Cari semua elemen teks dalam website
+        const elements = document.querySelectorAll('p, h1, h2, h3, h4, span, li, a');
+        let foundElement = null;
+
+        for (let i = 0; i < elements.length; i++) {
+            const el = elements[i];
+            
+            // Abaikan teks di dalam kotak carian itu sendiri supaya tak tersangkut
+            if (el.closest('.search-container') || el.closest('input')) continue;
+
+            // Semak jika elemen mengandungi perkataan carian & tiada anak elemen lain
+            if (el.textContent.toLowerCase().includes(query) && el.children.length === 0) {
+                foundElement = el;
+                break; // Berhenti pada perkataan pertama yang dijumpai
+            }
+        }
+
+        if (foundElement) {
+            // 1. Skrol dengan lancar ke arah elemen tersebut ke tengah skrin
+            foundElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // 2. Bungkus perkataan tersebut dengan warna teal
+            const originalText = foundElement.textContent;
+            const regex = new RegExp("(" + query + ")", 'gi');
+            foundElement.innerHTML = originalText.replace(regex, '<span class="search-highlight-teal" style="background-color: teal; color: white; padding: 2px 4px; border-radius: 4px;">$1</span>');
+        } else {
+            alert('Maaf, perkataan "' + searchContainerInput.value + '" tidak ditemui.');
+        }
+    }
+
+    // A. Logik Kes 1: Taip perkataan & tekan 'Enter'
+    searchContainerInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            executeSearch();
+        }
+    });
+
+    // B. Logik Kes 2: Klik pada butang kanta pembesar (Search Button)
+    if (searchBtn) {
+        searchBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            executeSearch();
+        });
+    }
+
+    // C. Logik Klik Di Mana-mana Skrin untuk Padam Highlight Teal
+    document.addEventListener('click', (e) => {
+        // Semak jika klik di luar kawasan kontainer carian
+        if (!searchContainerInput.contains(e.target) && (!searchBtn || !searchBtn.contains(e.target))) {
+            const activeHighlights = document.querySelectorAll('.search-highlight-teal');
+            if (activeHighlights.length > 0) {
+                activeHighlights.forEach(el => {
+                    el.outerHTML = el.textContent; // Pulihkan teks biasa
+                });
+                searchContainerInput.value = ''; // Kosongkan kotak teks
+            }
+        }
+    });
+}
+
+    // ========================================================
+    // 1. LOGIK PERTUKARAN TAB SECTION 2 & AUTO-PAUSE VIDEO
+    // ========================================================
+    const tabButtons = document.querySelectorAll('.tab-item');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const fashionVideo = document.getElementById('fashionVideo'); // Pastikan ID ini ada di HTML
+    const fashionPlayBtn = document.getElementById('playBtn');   // Pastikan ID ini ada di HTML
+
+    if (tabButtons.length > 0 && tabContents.length > 0) {
+        tabButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const targetTabId = button.getAttribute('data-tab');
+                
+                tabContents.forEach(content => {
+                    if (content.getAttribute('id') === targetTabId) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                        // AUTO-PAUSE: Kalau tab Fesyen ditutup, video berhenti
+                        if (content.id === 'fashion' && fashionVideo) {
+                            fashionVideo.pause();
+                            if (fashionPlayBtn) fashionPlayBtn.style.display = 'flex';
+                        }
+                    }
+                });
+            });
+        });
+    }
+
+    // ========================================================
+// TAMBAHAN KHAS: ARROW PERTUKARAN HALAMAN (TAB ACTIVITY)
+// ========================================================
+const btnNextActivity = document.getElementById('activity-btn-next');
+const btnPrevActivity = document.getElementById('activity-btn-prev');
+const activityPage1 = document.getElementById('activity-page-1');
+const activityPage2 = document.getElementById('activity-page-2');
+
+if (btnNextActivity && activityPage1 && activityPage2) {
+    btnNextActivity.addEventListener('click', (e) => {
+        e.preventDefault();
+        activityPage1.classList.remove('active');
+        activityPage2.classList.add('active');
+    });
+}
+
+if (btnPrevActivity && activityPage1 && activityPage2) {
+    btnPrevActivity.addEventListener('click', (e) => {
+        e.preventDefault();
+        activityPage2.classList.remove('active');
+        activityPage1.classList.add('active');
+    });
+}
+
+    // ========================================================
+    // 2. KAWALAN VIDEO FASHION (SECTION 2 - TAB FASHION)
+    // ========================================================
+    if (fashionVideo && fashionPlayBtn) {
+        // Klik butang play
+        fashionPlayBtn.addEventListener('click', () => {
+            fashionVideo.play();
+            fashionPlayBtn.style.display = 'none';
+        });
+
+        // Klik pada video untuk Toggle (Main/Pause)
+        fashionVideo.addEventListener('click', () => {
+            if (fashionVideo.paused) {
+                fashionVideo.play();
+                fashionPlayBtn.style.display = 'none';
+            } else {
+                fashionVideo.pause();
+                fashionPlayBtn.style.display = 'flex';
+            }
+        });
+
+        // Kalau video habis, tunjuk balik butang play
+        fashionVideo.addEventListener('ended', () => {
+            fashionPlayBtn.style.display = 'flex';
+        });
+    }
+
+    // ========================================================
+    // 3. LOGIK SECTION 3: JAM COUNTDOWN (18 OGOS 2026)
+    // ========================================================
+    const targetDate = new Date("August 18, 2026 00:00:00").getTime();
+    const countdownFunction = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const displayDays = days < 10 ? "0" + days : days;
+        const displayHours = hours < 10 ? "0" + hours : hours;
+        const displayMinutes = minutes < 10 ? "0" + minutes : minutes;
+        const displaySeconds = seconds < 10 ? "0" + seconds : seconds;
+
+        const timerEl = document.getElementById("countdown-timer");
+        if (timerEl) {
+            timerEl.innerHTML = displayDays + ":" + displayHours + ":" + displayMinutes + ":" + displaySeconds;
+        }
+
+        if (distance < 0) {
+            clearInterval(countdownFunction);
+            if (timerEl) {
+                timerEl.innerHTML = "EVENT STARTED!";
+                timerEl.style.fontSize = "3rem";
+            }
+        }
+    }, 1000);
+// ========================================================
+    // 4. LOGIK SECTION 3: KAWALAN VIDEO TEASER
+    // ========================================================
+    const s3Video = document.getElementById('teaserVideo');
+    const s3PlayBtn = document.getElementById('s3-play-btn');
+    const s3Overlay = document.getElementById('s3-overlay');
+
+    if (s3Video && s3PlayBtn && s3Overlay) {
+        const playSection3Video = () => {
+            s3Video.play();
+            s3Overlay.classList.add('hide');
+            s3Video.controls = true;
+        };
+
+        s3PlayBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            playSection3Video();
+        });
+
+        s3Overlay.addEventListener('click', playSection3Video);
+
+        s3Video.addEventListener('ended', () => {
+            s3Video.controls = false;
+            s3Overlay.classList.remove('hide');
+        });
+    }
+
+   // ========================================================
+// TAMBAHAN KHAS: SLIDER HIGHLIGHT & REVIEW (SECTION 4)
+// ========================================================
+const rPage1 = document.getElementById('review-page-1');
+const rPage2 = document.getElementById('review-page-2');
+const rPage3 = document.getElementById('review-page-3');
+const nextButtonsS4 = document.querySelectorAll('.next-btn-s4');
+const prevButtonsS4 = document.querySelectorAll('.prev-btn-s4');
+const dotsS4 = document.querySelectorAll('.slider-dots .dot');
+
+function showReviewPage(pageNumber) {
+        if (!rPage1) return;
+        if (!rPage2) return;
+        if (!rPage3) return;
+
+    // Padam status aktif semua halaman
+    rPage1.classList.remove('active');
+    rPage2.classList.remove('active');
+    rPage3.classList.remove('active');
+
+    // Aktifkan halaman pilihan
+    if (pageNumber === 1) rPage1.classList.add('active');
+    if (pageNumber === 2) rPage2.classList.add('active');
+    if (pageNumber === 3) rPage3.classList.add('active');
+
+    // Kemaskini dot bulat bawah
+    if (dotsS4.length > 0) {
+        dotsS4.forEach((dot, index) => {
+            dot.classList.toggle('active', index === (pageNumber - 1));
+        });
+    }
+}
+
+// Klik Arrow Kanan (>)
+nextButtonsS4.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (rPage1 && rPage1.classList.contains('active')) {
+            showReviewPage(2);
+        } else if (rPage2 && rPage2.classList.contains('active')) {
+            showReviewPage(3);
+        }
+    });
+});
+
+// Klik Arrow Kiri (<)
+prevButtonsS4.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (rPage2 && rPage2.classList.contains('active')) {
+            showReviewPage(1);
+        } else if (rPage3 && rPage3.classList.contains('active')) {
+            showReviewPage(2);
+        }
+    });
+});
+
+// Klik terus pada Dot Bulat
+dotsS4.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        showReviewPage(index + 1);
+    });
+});
+
+    // ========================================================
+// TAMBAHAN KHAS: AUTO-BANNER FOOTER & NEWSLETTER
+// ========================================================
+
+// 1. Banner Auto-Slide (Setiap 2 saat)
+const bannerSlides = document.querySelectorAll('.banner-slide'); 
+const bannerDots = document.querySelectorAll('.banner-dots .b-dot');
+let currentSlide = 0;
+
+function showSlide(index) {
+    if (bannerSlides.length === 0) return;
+    
+    // Padam kelas aktif
+    bannerSlides.forEach(slide => slide.classList.remove('active-slide'));
+    bannerDots.forEach(dot => dot.classList.remove('active'));
+
+    // Aktifkan slide yang baru
+    bannerSlides[index].classList.add('active-slide');
+    if (bannerDots[index]) bannerDots[index].classList.add('active');
+}
+
+// Auto-swap setiap 2 saat (2000ms)
+setInterval(() => {
+    if (bannerSlides.length > 0) {
+        currentSlide = (currentSlide + 1) % bannerSlides.length;
+        showSlide(currentSlide);
+    }
+}, 2000);
+
+// Klik pada dot banner (Manual control)
+bannerDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+    });
+});
+
+// 2. Newsletter Button (Buka Google Chrome / Link Baru)
+const emailInput = document.querySelector('.footer-email-input');
+const discoverBtn = document.querySelector('.footer-discover-btn');
+const emailForm = document.querySelector('.footer-email-form');
+
+if (emailForm && emailInput) {
+    emailForm.addEventListener('submit', (e) => {
+        // e.preventDefault() tidak perlu di sini sebab HTML awak dah ada onsubmit="event.preventDefault();"
+        
+        // Semak jika pengguna dah isi email dengan sah
+        if (emailInput.value.trim() !== "") {
+            // Buka halaman Google Chrome ke link baharu
+            window.open('https://www.google.com', '_blank');
+        }
+    });
+}
+
+  </script>
+
+
+
+ </body>
+
+</html>
